@@ -1,4 +1,8 @@
+import numpy as np
+import sys # used to handle the exceptions in the try -> except statements
 import powersupply2 as powersupply # import the library for testing
+
+
 
 # Setup the powersupply serial ports!
 try:
@@ -10,20 +14,42 @@ try:
     zCoil = powersupply.PowerSupply('/dev/tty.usbserial-FTFBPHDT') # assign the correct port the the z powersupply
     
 except:
+    print("Error: %s, value: %s, exception: %s" % sys.exc_info()) # catch the exception and print it out!
     print('Error setting up serial device. Please check the serial port adresses in the setup function.')
 
-    
+
+# open the ports! 
+xCoil.openPort()
+yCoil.openPort()
+zCoil.openPort()
+
+print(zCoil.current())
+print(zCoil.current(301.2))
+print(zCoil.current())
+print(zCoil.current())
+print(zCoil.current())
+
+#close the ports
+xCoil.closePort()
+yCoil.closePort()
+zCoil.closePort()
+
+
+'''    
 # put the pendulum in it's starting position
 try:
     def set_angle(angle):
     
         currentAmplitude = 400
         currentOffset = 400
+        
+        xCurrent = currentOffset + (currentAmplitude * np.sin(angle))
+        yCurrent = currentOffset + (currentAmplitude * np.cos(angle))
+        
+        xCoil.current(xCurrent)
+        yCoil.current(yCurrent)
     
-        xCoil.current( currentOffset + (currentAmplitude * np.sin(angle)) )
-        yCoil.current( currentOffset + (currentAmplitude * np.cos(angle)) )
-    
-    
+        print(xCurrent, yCurrent)
 
     # open the ports! 
     xCoil.openPort()
@@ -35,6 +61,7 @@ try:
     zCoil.current(465)
 
 except:
+    print("Error: %s, value: %s, exception: %s" % sys.exc_info()) # catch the exception and print it out!
     print('set_angle failed!')
 
 
@@ -44,7 +71,7 @@ yCoil.closePort()
 zCoil.closePort()
 
 
-'''# reset the cois to zero position
+# reset the cois to zero position
 set_angle(0)
 print('sleeping for 5 seconds')
 time.sleep(5)

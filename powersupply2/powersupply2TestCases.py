@@ -17,30 +17,31 @@ except:
     print("Error: %s, value: %s, exception: %s" % sys.exc_info()) # catch the exception and print it out!
     print('Error setting up serial device. Please check the serial port adresses in the setup function.')
 
+try:
+    # open the ports! 
+    xCoil.openPort()
+    yCoil.openPort()
+    zCoil.openPort()
 
-# open the ports! 
-xCoil.openPort()
-yCoil.openPort()
-zCoil.openPort()
+    print(zCoil.current())
+    print('---')
+    print(zCoil.current(7.2))
+    print('---')
+    print(zCoil.current(0.01))
+    print('---')
+    print(zCoil.current(0))
+    print('---')
+    #print(zCoil.current('Two'))
+    print('---')
+    print(zCoil.current(-100))
+    print(zCoil.current(6.2))
 
-print(zCoil.current())
-print('---')
-print(zCoil.current(7.2))
-print('---')
-print(zCoil.current(0.01))
-print('---')
-print(zCoil.current(0))
-print('---')
-print(zCoil.current('Two'))
-print('---')
-print(zCoil.current(-100))
-print(zCoil.current(6.2))
-
-#close the ports
-xCoil.closePort()
-yCoil.closePort()
-zCoil.closePort()
-
+    #close the ports
+    xCoil.closePort()
+    yCoil.closePort()
+    zCoil.closePort()
+except:
+    print("Error: %s, value: %s, exception: %s" % sys.exc_info()) # catch the exception and print it out!
 
 '''    
 # put the pendulum in it's starting position

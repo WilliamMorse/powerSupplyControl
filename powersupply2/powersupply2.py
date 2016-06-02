@@ -34,7 +34,7 @@ class PowerSupply():
         self.ser.write(bytearrayCommandToWrite + b'\r') # add the return char to the command bytearray
         
         # now wait for the powersupply to respond
-        time.sleep(0.2) #time.sleep(.05) # make this longer if you're getting errors
+        time.sleep(0.05) #time.sleep(.05) # make this longer if you're getting errors
         
         # read the return message 
         out = bytearray() # empty bytearray to fill from the input buffer
@@ -99,8 +99,8 @@ class PowerSupply():
         otherwise it will try to set the voltage of the powersupply and return a None type. 
         '''
         
-        if(self.checkMode() != 'CV'): # check the mode of the powersupply
-             raise Exception('Incorrect mode! Supply is in constant current mode.')
+        #if(self.checkMode() != 'CV'): # check the mode of the powersupply
+        #     raise Exception('Incorrect mode! Supply is in constant current mode.')
 
         initialPortOpen = self.portOpen # handles the port state so we can leave it open if it is already open.
         if initialPortOpen == False: # if the port is closed,
@@ -137,8 +137,8 @@ class PowerSupply():
         The returned current float is also in milliamps.
         '''
         
-        if(self.checkMode() != 'CC'): # make sure the supply is in constant current mode. 
-            raise Exception('Incorrect mode! Supply is in constant voltage mode.')
+        #if(self.checkMode() != 'CC'): # make sure the supply is in constant current mode. 
+        #    raise Exception('Incorrect mode! Supply is in constant voltage mode.')
 
         initialPortState = self.portOpen # handles the port state so we can leave it open if it is open 
         if initialPortState == False:

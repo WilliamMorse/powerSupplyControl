@@ -78,15 +78,15 @@ class PowerSupply():
             print('Input number out of range! (Likly too small. Minimum is 0.01V or 0.1mA)')
             #raise Exception('Input number out of range! (Likly too small. Minimum is 0.01V or 0.1mA)')
         else:
-            print('strange message receved: %s' % out)
-            #raise Exception('strange message receved: %s' % out)
+            print('strange message receved: %s' % message)
+            #raise Exception('strange message receved: %s' % message)
             
     def checkMode(self):
         '''
         Test to see if the supply is in constant current mode or constant voltage mode
         returns a string 'CV' if constant voltage and 'CC' if the mode is constant current. 
         '''
-        out = self.writeToPort(bytearray('STAT?', 'utf-8')
+        out = self.writeToPort(bytearray('STAT?', 'utf-8'))
         if out == 'CV' or out == 'CC': # if we get expected values for the mode
             return out # return them!
         else:
@@ -99,7 +99,7 @@ class PowerSupply():
         otherwise it will try to set the voltage of the powersupply and return a None type. 
         '''
         
-        if(self.checkMode()) != 'CV'): # check the mode of the powersupply
+        if(self.checkMode() != 'CV'): # check the mode of the powersupply
              raise Exception('Incorrect mode! Supply is in constant current mode.')
 
         initialPortOpen = self.portOpen # handles the port state so we can leave it open if it is already open.

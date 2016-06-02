@@ -54,7 +54,7 @@ class PowerSupply():
         # if we don't, then that means that we just set the current and the powersupply is 
         # just telling us that it's finished setting the current with the return bytes
         if len(out) == 0:
-            return 
+            return(out)
         
         out = out.decode("utf-8") # switch from type bytearray to string
         
@@ -72,14 +72,14 @@ class PowerSupply():
         and raise an exception if an error is found.
         '''
         if message == 'Syntax Error':
-            print('Syntax Error. Command not a number or value too high for the power supply')
-            #raise Exception('Syntax Error. Command not a number or value too high for the power supply')
+            #print('Syntax Error. Command not a number or value too high for the power supply')
+            raise Exception('Syntax Error. Command not a number or value too high for the power supply')
         elif message == 'Out Of Range':
-            print('Input number out of range! (Likly too small. Minimum is 0.01V or 0.1mA)')
-            #raise Exception('Input number out of range! (Likly too small. Minimum is 0.01V or 0.1mA)')
+            #print('Input number out of range! (Likly too small. Minimum is 0.01V or 0.1mA)')
+            raise Exception('Input number out of range! (Likly too small. Minimum is 0.01V or 0.1mA)')
         else:
-            print('strange message receved: %s' % message)
-            #raise Exception('strange message receved: %s' % message)
+            #print('strange message receved: %s' % message)
+            raise Exception('strange message receved: %s' % message)
             
     def checkMode(self):
         '''

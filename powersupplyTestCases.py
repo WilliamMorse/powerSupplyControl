@@ -1,6 +1,6 @@
 import numpy as np
 import sys # used to handle the exceptions in the try -> except statements
-import powersupply2 as powersupply # import the library for testing
+import powersupply # import the library for testing
 
 
 
